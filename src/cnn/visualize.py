@@ -1,4 +1,4 @@
-# Shows a 3-panel demo: all keypoints | YOLO mask | filtered keypoints. Usage: python src/cnn/extras/visualize.py --sequence 00
+# Shows a 3-panel demo: all keypoints | YOLO mask | filtered keypoints. Usage: python src/cnn/visualize.py --sequence 00
 
 import argparse
 import os
@@ -7,13 +7,14 @@ import random
 import cv2
 import numpy as np
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'main'))
+sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'main'))
 from mask_generator import generate_mask
 from feature_filter import filter_keypoints, filtering_stats
 from homography_ransac import extract_orb_features
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
+OUTPUT_DIR   = os.path.join(os.path.dirname(__file__), '..', '..', 'output')
 
 
 # Draws keypoints as green squares with a title bar and optional bottom label.
@@ -163,6 +164,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.image:
+        if args.save is None:
+            os.makedirs(OUTPUT_DIR, exist_ok=True)
+            fname = os.path.splitext(os.path.basename(args.image))[0]
+            args.save = os.path.join(OUTPUT_DIR, f'panel_{fname}.jpg')
+            print(f"Saving to: {args.save}")
         run_single_image(args.image, mask_path=args.mask, save_path=args.save, conf=args.conf)
     else:
         sequence = args.sequence

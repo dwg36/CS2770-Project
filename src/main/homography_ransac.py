@@ -2,12 +2,12 @@ import cv2
 import numpy as np
 
 
-def extract_orb_features(image, nfeatures=2000):
+def extract_orb_features(image, nfeatures=2000, mask=None):
     """
     Extract ORB keypoints and descriptors from a grayscale image.
     """
     orb = cv2.ORB_create(nfeatures=nfeatures)
-    keypoints, descriptors = orb.detectAndCompute(image, None)
+    keypoints, descriptors = orb.detectAndCompute(image, mask)
     return keypoints, descriptors
 
 
@@ -122,9 +122,17 @@ def compare_two_images(
     if mask_fn is not None:
         import os, sys as _sys
         _sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'cnn'))
+        _sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'cnn', 'extras'))
         from feature_filter import filter_keypoints_and_descriptors
-        kp1, desc1 = filter_keypoints_and_descriptors(kp1, desc1, mask_fn(baseline_path))
-        kp2, desc2 = filter_keypoints_and_descriptors(kp2, desc2, mask_fn(test_path))
+        from visualize import build_panel
+        mask1 = mask_fn(baseline_path)
+        mask2 = mask_fn(test_path)
+        kp1, desc1 = filter_keypoints_and_descriptors(kp1, desc1, mask1)
+        kp2, desc2 = filter_keypoints_and_descriptors(kp2, desc2, mask2)
+        # Save CNN panel visualizations alongside the match result
+        stem, ext = os.path.splitext(save_vis_path)
+        cv2.imwrite(f"{stem}_panel_baseline{ext}", build_panel(baseline_path, mask=mask1))
+        cv2.imwrite(f"{stem}_panel_test{ext}", build_panel(test_path, mask=mask2))
 
     if desc1 is None or len(kp1) == 0:
         raise ValueError("No ORB features found in baseline image.")

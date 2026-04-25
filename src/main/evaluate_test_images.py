@@ -124,7 +124,8 @@ def evaluate_test_images_against_keyframes(
     ransac_thresh=3.0,
     min_inliers_success=50,
     min_inlier_ratio_success=0.25,
-    keyframe_window=5
+    keyframe_window=5,
+    mask_fn=None,  # CNN: pass build_mask_fn() from cnn/mask_generator.py — TODO (ViT): swap in your equivalent here
 ):
     with open(keyframe_path, "rb") as f:
         keyframes = pickle.load(f)
@@ -168,13 +169,16 @@ def evaluate_test_images_against_keyframes(
             continue
 
         # [TODO] STEP 1: dynamic segmentation (CNN / ViT)
+        dynamic_mask = mask_fn(test_path) if mask_fn is not None else None
+        # TODO (ViT): swap mask_fn for your equivalent function
 
         # [TODO] STEP 2: invert mask (static area only; static_mask = 1 - dynamic_mask)
+        static_mask = cv2.bitwise_not(dynamic_mask) if dynamic_mask is not None else None
 
         # [TODO] STEP 3: ORB extraction with mask
         test_kp, test_desc = extract_orb_features(
             test_img,
-            #mask=static_mask, #Uncomment this when STEP 1 and STEP 2 are completed.
+            mask=static_mask,
             nfeatures=nfeatures
         )
 

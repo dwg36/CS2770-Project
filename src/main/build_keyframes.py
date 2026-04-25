@@ -40,7 +40,8 @@ def build_baseline_keyframes(
     ratio_thresh=0.75,
     ransac_thresh=3.0,
     min_inliers_to_skip=120,
-    min_frame_gap=5
+    min_frame_gap=5,
+    mask_fn=None,  # CNN: pass build_mask_fn() from cnn/mask_generator.py — TODO (ViT): swap in your equivalent here
 ):
     image_paths = sorted(glob.glob(os.path.join(baseline_dir, image_ext)))
 
@@ -61,6 +62,13 @@ def build_baseline_keyframes(
             continue
 
         kp, desc = extract_orb_features(img, nfeatures=nfeatures)
+
+        # Strip keypoints on dynamic objects if a mask function was provided (CNN/ViT)
+        if mask_fn is not None:
+            import sys as _sys
+            _sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'cnn'))
+            from feature_filter import filter_keypoints_and_descriptors
+            kp, desc = filter_keypoints_and_descriptors(kp, desc, mask_fn(image_path))
 
         if desc is None or len(kp) == 0:
             print(f"[SKIP] No ORB features: {image_path}")

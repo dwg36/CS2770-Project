@@ -98,7 +98,8 @@ def compare_two_images(
     nfeatures=2000,
     ratio_thresh=0.75,
     ransac_thresh=3.0,
-    save_vis_path="match_result.jpg"
+    save_vis_path="match_result.jpg",
+    mask_fn=None,  # CNN: pass build_mask_fn() from cnn/mask_generator.py — TODO (ViT): swap in your equivalent here
 ):
     """
     Compare two images using ORB + matching + Homography RANSAC.
@@ -116,6 +117,14 @@ def compare_two_images(
     # 2. Extract ORB features
     kp1, desc1 = extract_orb_features(img1, nfeatures=nfeatures)
     kp2, desc2 = extract_orb_features(img2, nfeatures=nfeatures)
+
+    # 2.5. Strip keypoints on dynamic objects if a mask function was provided (CNN/ViT)
+    if mask_fn is not None:
+        import os, sys as _sys
+        _sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'cnn'))
+        from feature_filter import filter_keypoints_and_descriptors
+        kp1, desc1 = filter_keypoints_and_descriptors(kp1, desc1, mask_fn(baseline_path))
+        kp2, desc2 = filter_keypoints_and_descriptors(kp2, desc2, mask_fn(test_path))
 
     if desc1 is None or len(kp1) == 0:
         raise ValueError("No ORB features found in baseline image.")

@@ -125,7 +125,7 @@ def evaluate_test_images_against_keyframes(
     min_inliers_success=50,
     min_inlier_ratio_success=0.25,
     keyframe_window=5,
-    mask_fn=None,  # CNN: pass build_mask_fn() from cnn/mask_generator.py — TODO (ViT): swap in your equivalent here
+    mask_fn=None,  # CNN: pass build_mask_fn() from cnn/mask_generator.py
 ):
     with open(keyframe_path, "rb") as f:
         keyframes = pickle.load(f)

@@ -1,0 +1,46 @@
+============================================================
+  Baseline (ORB) Keyframe Evaluation Results
+  Dataset: test_keyframe_results_02_with_no.csv
+  Date: 2026-04-24
+============================================================
+
+--- Dataset ---
+Total test frames:       5,983
+Columns:                 13 (3 chr, 9 dbl, 1 lgl)
+Note:                    Fewer columns than SAM/DINOv2 variants
+                         (no mask_path, no resized_size)
+
+--- Success / Failure ---
+Success Rate:            80.11%
+Successful frames:       4,794
+Failed frames:           1,189
+
+--- Inlier Ratio (Overall) ---
+[See overall_inlier_ratio_boxplot.png]
+
+--- Inlier Ratio by Outcome ---
+[See inlier_ratio_by_success_boxplot.png]
+
+--- Matching Metrics ---
+- num_matches, num_inliers, num_outliers tracked per frame
+- Pure ORB features with no additional masking or learned features
+
+--- Temporal Consistency (Keyframe Index) ---
+Total steps evaluated:   5,982
+Decreases in keyframe index (backtracking): 210
+Decrease ratio:          0.035 (3.5%)
+- Highest backtracking count of all methods
+- Matches SAM+GroundingDINO ratio (0.035), both worse than
+  DINOv2 (0.031) and CNN (0.031)
+
+--- Method ---
+Feature extractor:       ORB only (no masking, no learned features)
+This is the reference baseline all other methods are compared against.
+
+--- Comparison Notes ---
+- Lowest success rate of all four methods (80.11%)
+- Most backtracking (210 decreases)
+- Establishes the floor — every other method improves on this
+- SAM+GroundingDINO adds masking but barely improves over baseline
+- DINOv2 and CNN both show substantially better success rates
+============================================================

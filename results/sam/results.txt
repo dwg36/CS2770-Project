@@ -1,0 +1,49 @@
+============================================================
+  SAM + GroundingDINO Keyframe Evaluation Results
+  Dataset: test_keyframe_results_sam_dino_masked_with_no.csv
+  Date: 2026-04-24
+============================================================
+
+--- Dataset ---
+Total test frames:       5,983
+Columns:                 15 (4 chr, 9 dbl, 2 lgl)
+Notable extra columns:   mask_path, mask_used (vs baseline)
+
+--- Success / Failure ---
+Success Rate:            81.18%
+Successful frames:       4,857
+Failed frames:           1,126
+
+--- Inlier Ratio (Overall) ---
+[See overall_inlier_ratio_boxplot.png]
+
+--- Inlier Ratio by Outcome ---
+[See inlier_ratio_by_success_boxplot.png]
+
+--- Matching Metrics ---
+- num_matches, num_inliers, num_outliers tracked per frame
+- SAM masking applied before ORB feature extraction
+- mask_used flag indicates per-frame whether mask was applied
+
+--- Temporal Consistency (Keyframe Index) ---
+Total steps evaluated:   5,982
+Decreases in keyframe index (backtracking): 208
+Decrease ratio:          0.035 (3.5%)
+- Slightly more backtracking than DINOv2 (0.031) and CNN (0.031)
+- Masking may occasionally discard useful features, causing
+  the matcher to jump to a non-sequential keyframe
+
+--- Method ---
+Feature extractor:       ORB
+Masking:                 SAM (Segment Anything Model) +
+                         GroundingDINO (text-prompted segmentation)
+Purpose of masking:      Focus ORB matching on semantically
+                         relevant regions identified by DINO
+
+--- Comparison Notes ---
+- Better success rate than baseline ORB (80.11%), but still well
+  below DINOv2 (93.73%) and marginally below CNN (81.2%)
+- Higher backtracking ratio than DINOv2 and CNN (both 0.031)
+- Masking adds overhead but yields only marginal improvement
+  over baseline — does not close the gap to learned feature methods
+============================================================

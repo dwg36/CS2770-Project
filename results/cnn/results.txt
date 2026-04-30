@@ -1,0 +1,46 @@
+============================================================
+  CNN (YOLOv8) Keyframe Evaluation Results
+  Dataset: results_cnn_full_with_no.csv
+  Date: 2026-04-24
+  Author: David Gormley
+============================================================
+
+--- Dataset ---
+Total test frames:       5,983
+Columns:                 13 (3 chr, 9 dbl, 1 lgl)
+
+--- Success / Failure ---
+Success Rate:            81.2%
+Successful frames:       4,858
+Failed frames:           1,125
+
+--- Inlier Ratio (Overall) ---
+[See overall_inlier_ratio_boxplot.png]
+
+--- Inlier Ratio by Outcome ---
+[See inlier_ratio_by_success_boxplot.png]
+
+--- Matching Metrics ---
+- num_matches, num_inliers, num_outliers tracked per frame
+- CNN (YOLOv8) used for feature/keyframe selection stage
+
+--- Temporal Consistency (Keyframe Index) ---
+Total steps evaluated:   5,982
+Decreases in keyframe index (backtracking): 186
+Decrease ratio:          0.031 (3.1%)
+- Ties with DINOv2 for lowest backtracking ratio
+- Significantly better temporal consistency than baseline
+  and SAM+GroundingDINO (both 0.035)
+
+--- Method ---
+Feature extractor:       CNN-based (YOLOv8)
+Output file:             results_cnn_full_with_no.csv
+
+--- Comparison Notes ---
+- Success rate (81.2%) comparable to SAM+GroundingDINO (81.18%)
+  and notably better than baseline (80.11%)
+- Temporal consistency (0.031) matches DINOv2 — best of all methods
+- Despite similar success rate to SAM, CNN achieves this with
+  much better keyframe monotonicity (fewer backtracks)
+- DINOv2 remains the top performer on success rate (93.73%)
+============================================================

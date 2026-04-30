@@ -1,0 +1,52 @@
+============================================================
+  DINOv2 Keyframe Evaluation Results
+  Dataset: test_keyframe_results_dinov2_cached_w672_with_no.csv
+  Date: 2026-04-24
+============================================================
+
+--- Dataset ---
+Total test frames:       5,983
+Columns:                 15 (4 chr, 10 dbl, 1 lgl)
+Target width:            672px (cached/resized)
+
+--- Success / Failure ---
+Success Rate:            93.73%
+Successful frames:       5,608
+Failed frames:           375
+
+--- Inlier Ratio (Overall) ---
+Median:                  0.555
+Mean:                    0.547
+
+--- Inlier Ratio by Outcome ---
+                         Median    Mean
+  Success (TRUE):        0.561     0.550
+  Failure (FALSE):       0.500     0.492
+
+--- Matching Metrics ---
+- num_matches, num_inliers, num_outliers tracked per frame
+- Inliers vs Matches show strong positive linear correlation
+- Outlier counts are consistently lower than inlier counts
+
+--- Temporal Consistency (Keyframe Index) ---
+Total steps evaluated:   5,982
+Decreases in keyframe index (backtracking): 187
+Decrease ratio:          0.031 (3.1%)
+- Best keyframe index is mostly monotonically increasing,
+  indicating strong temporal consistency across the sequence.
+- Backtracking events (red points) are sparse and scattered,
+  not clustered — no systematic failure regions.
+
+--- Inlier Ratio Over Time ---
+- Generally stable between 0.4–0.8 across 6,000 frames
+- Notable dip region around frames 2000–3500 (lower inlier ratios)
+- Sharp drops to ~0.0 at a few isolated frames (outlier events)
+- Recovery is quick after drops — no sustained degradation
+
+--- Method ---
+Feature extractor:       DINOv2 (ViT patch features)
+Matcher:                 ORB
+Comparison baselines (not shown here):
+  - Baseline ORB only
+  - SAM + GroundingDINO masked
+============================================================

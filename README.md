@@ -7,7 +7,8 @@ David
 - Project Proposal Presentation
 - Project Update Presentation
 - Project Final Presentation
-
+- Final Report: Writer
+  
 Allen
 - ORB Implementation/Integration/Evaluation
 - SAM Implementation/Integration/Evaluation
@@ -17,6 +18,7 @@ Allen
 - Project Update Presentation
 - Project Update Presentation 2 (Pivot)
 - Project Final Presentation
+- Final Report: Editor
 
 Jonah
 - Project Update Presentation

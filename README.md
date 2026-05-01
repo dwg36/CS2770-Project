@@ -10,6 +10,7 @@ David
 - Final Report: Writer
   
 Allen
+- Preliminary SLAM Map Testing
 - ORB Implementation/Integration/Evaluation
 - SAM Implementation/Integration/Evaluation
 - ViT Implementation/Integration/Evaluation

@@ -14,6 +14,7 @@ Allen
 - ORB Implementation/Integration/Evaluation
 - SAM Implementation/Integration/Evaluation
 - ViT Implementation/Integration/Evaluation
+- RStudio Evaluation Files
 - Dataset Research/Aquisition  - Oxford Car
 - Project Proposal Presentation
 - Project Update Presentation

@@ -18,7 +18,7 @@ Allen
 - Project Update Presentation
 - Project Update Presentation 2 (Pivot)
 - Project Final Presentation
-- Final Report: Editor
+- Final Report: Proofreader + Editor
 
 Jonah
 - Project Update Presentation

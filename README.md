@@ -9,7 +9,7 @@ David
 - Project Final Presentation
 
 Allen
-- Finalized ORB Implementation/Integration/Evaluation
+- ORB Implementation/Integration/Evaluation
 - SAM Implementation/Integration/Evaluation
 - ViT Implementation/Integration/Evaluation
 - Dataset Research - Oxford Car

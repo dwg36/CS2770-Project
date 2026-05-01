@@ -1,3 +1,5 @@
+# Contributions
+
 David
 - CNN Implementation/Integration/Evaluation
 - Preliminary ORB Feature Implementation
@@ -6,12 +8,14 @@ David
 - Project Update Presentation
 - Project Final Presentation
 - Final Report: Writer
-
+  
 Allen
+- Preliminary SLAM Map Testing
 - ORB Implementation/Integration/Evaluation
 - SAM Implementation/Integration/Evaluation
 - ViT Implementation/Integration/Evaluation
-- Dataset Research/Aquisition - Oxford Car
+- RStudio Evaluation Files
+- Dataset Research/Aquisition  - Oxford Car
 - Project Proposal Presentation
 - Project Update Presentation
 - Project Update Presentation 2 (Pivot)
